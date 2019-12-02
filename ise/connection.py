@@ -2,11 +2,10 @@ import requests, json
 from ise import exceptions
 
 class iseconnection(object):
-    def __init__(self, ssl_verify=False, use_ssl=True, host=None, auth_token=None, auth=None, port=None, api_prefix=None):
+    def __init__(self, ssl_verify=False, use_ssl=True, host=None, auth=None, port='9060', api_prefix=None):
 
         self.use_ssl = use_ssl
         self.host = host
-        self.auth_token = auth_token
         self.port = port
         self.auth = auth
         self.api_prefix = api_prefix
