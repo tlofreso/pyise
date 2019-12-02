@@ -1,1 +1,1 @@
-from .ise import ise
+from .ise import Ise
