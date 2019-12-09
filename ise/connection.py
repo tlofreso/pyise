@@ -49,10 +49,10 @@ class IseConnection(object):
             err_msg = "Unable to find address: {}".format(self.host)
             raise socket.gaierror(err_msg)
         except requests.exceptions.ConnectionError:
-            err_msg = "Unable to connect to Netbox host: {}".format(self.host)
+            err_msg = "Unable to connect to ISE host: {}".format(self.host)
             raise ConnectionError(err_msg)
         except requests.exceptions.Timeout:
-            raise TimeoutError("Connection to Netbox host timed out")
+            raise TimeoutError("Connection to ISE host timed out")
         except Exception as e:
             raise Exception(e)
         finally:
