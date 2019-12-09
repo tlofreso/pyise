@@ -40,6 +40,7 @@ class IseConnection(object):
         self.session.headers.update({"Accept": "application/json"})
 
     def __request(self, method, params=None, body=None, url=None):
+
         request = requests.Request(method=method, url=url, json=body)
         prepared_request = self.session.prepare_request(request)
 
@@ -67,10 +68,7 @@ class IseConnection(object):
 
     def get(self, param, **kwargs):
 
-        if kwargs:
-            url = "{}{}".format(self.base_url, param)
-        else:
-            print("No params specified")
+        url = "{}{}".format(self.base_url, param)
 
         resp_ok, resp_status, resp_data = self.__request("GET", params=param, url=url)
 
