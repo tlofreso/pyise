@@ -13,7 +13,7 @@ class Endpoints(object):
     def get_groups(self, **kwargs):
         # Return all identity groups
 
-        return self.ise_con.get("/identitygroup", **kwargs)
+        return self.ise_con.get("/endpointgroup", **kwargs)
 
     def get_endpoints(self, **kwargs):
         # Return all endpoints
