@@ -74,9 +74,6 @@ class IseConnection(object):
 
         resp_ok, resp_status, resp_data = self.__request("GET", params=param, url=url)
 
-        # print(resp_status)
-        # print(url)
-
         if resp_ok and resp_status == 200:
             if "results" in resp_data:
                 return resp_data["results"]
