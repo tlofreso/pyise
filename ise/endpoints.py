@@ -5,7 +5,7 @@ class Endpoints(object):
     def __init__(self, ise_con):
         self.ise_con = ise_con
 
-    def get_endpoints_by_mac(self, mac, **kwargs):
+    def get_by_mac(self, mac, **kwargs):
         # Return details of endpoint by MAC
 
         return self.ise_con.get("/endpoint?filter=mac.EQ." + mac, mac=mac, **kwargs)
@@ -17,7 +17,8 @@ class Endpoints(object):
 
     def get_endpoints(self, **kwargs):
         # Return all endpoints
-        pass
+
+        return self.ise_con.get("/endpoint", **kwargs)
 
     def create_endpoint():
         pass
