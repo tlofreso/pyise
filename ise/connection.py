@@ -41,6 +41,9 @@ class IseConnection(object):
 
     def __request(self, method, params=None, body=None, url=None):
 
+        if url is None:
+            url = self.base_url + str(params)
+
         request = requests.Request(method=method, url=url, json=body)
         prepared_request = self.session.prepare_request(request)
 
@@ -66,11 +69,11 @@ class IseConnection(object):
 
         return response.ok, response.status_code, response_data
 
-    def get(self, param, **kwargs):
+    def get(self, params, **kwargs):
 
-        url = "{}{}".format(self.base_url, param)
+        url = "{}{}".format(self.base_url, params)
 
-        resp_ok, resp_status, resp_data = self.__request("GET", params=param, url=url)
+        resp_ok, resp_status, resp_data = self.__request("GET", params=params, url=url)
 
         if resp_ok and resp_status == 200:
             if "results" in resp_data:
@@ -80,8 +83,11 @@ class IseConnection(object):
         else:
             return []
 
-    def put():
-        pass
+    def put(self, params, **kwargs):
+
+        url = "{}{}".format(self.base_url, params)
+
+        resp_ok, resp_status, resp_data = self.__request("PUT", params=params, data=data, url=url)
 
     def patch():
         pass
