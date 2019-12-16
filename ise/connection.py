@@ -85,9 +85,17 @@ class IseConnection(object):
 
     def put(self, params, **kwargs):
 
-        url = "{}{}".format(self.base_url, params)
+        url = "{}{}".format(self.base_url, params, data)
 
-        resp_ok, resp_status, resp_data = self.__request("PUT", params=params, data=data, url=url)
+        resp_ok, resp_status, resp_data = self.__request("PUT", params=params, data=json.dumps(data), url=url)
+
+        if resp_ok and resp_status == 201:
+            if "results" in resp_data:
+                return resp_data["results"]
+            else:
+                return resp_data
+        else:
+            return []
 
     def patch():
         pass
