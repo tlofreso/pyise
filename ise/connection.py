@@ -69,10 +69,12 @@ class IseConnection(object):
 
         return response.ok, response.status_code, response_data
 
-    def get(self, params, **kwargs):
+    def get(self, params, api_filter, **kwargs):
         # Function for REST method: GET
 
-        url = "{}{}".format(self.base_url, params)
+        url = "{}{}{filter}".format(
+            self.base_url, params, filter="" if api_filter is None else api_filter
+        )
 
         resp_ok, resp_status, resp_data = self.__request("GET", params=params, url=url)
 

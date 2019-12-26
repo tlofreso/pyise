@@ -10,10 +10,10 @@ class Endpoints(object):
 
         return self.ise_con.get("/endpoint?filter=mac.EQ." + mac, **kwargs)
 
-    def get_groups(self, **kwargs):
+    def get_groups(self, api_filter=None, **kwargs):
         # Return all identity groups
 
-        return self.ise_con.get("/endpointgroup", **kwargs)
+        return self.ise_con.get("/endpointgroup", api_filter, **kwargs)
 
     def get_endpoints(self, **kwargs):
         # Return all endpoints
