@@ -6,12 +6,20 @@ class Endpoints(object):
         self.ise_con = ise_con
 
     def get_by_mac(self, mac=None, **kwargs):
-        # Return details of endpoint by MAC
+        """GET an endpoint by MAC address
+
+        :param mac: specify a MAC address. Format: mac='00:00:00:00:00:00'
+        :param kwargs: requests body dict
+        """
 
         return self.ise_con.get("/endpoint?filter=mac.EQ." + mac, **kwargs)
 
     def get_groups(self, api_filter=None, **kwargs):
-        # Return all identity groups
+        """GET all Endpoint Identity Groups
+
+        :param api_filter: Apply a filter to GET call. Format: api_filter='?page=1&size=10'
+        :param kwargs: requests body dict
+        """
 
         return self.ise_con.get("/endpointgroup", api_filter, **kwargs)
 
