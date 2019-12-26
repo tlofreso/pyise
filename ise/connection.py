@@ -69,21 +69,27 @@ class IseConnection(object):
 
         return response.ok, response.status_code, response_data
 
-    def get(self, params, api_filter, **kwargs):
+    def get(self, params, api_filter, pagination, **kwargs):
         # Function for REST method: GET
 
-        url = "{}{}{filter}".format(
-            self.base_url, params, filter="" if api_filter is None else api_filter
-        )
+        url = "{}{}{filter}".format(self.base_url, params, filter=api_filter)
 
         resp_ok, resp_status, resp_data = self.__request("GET", params=params, url=url)
 
-        if resp_ok and resp_status == 200:
+        if pagination == False and resp_ok and resp_status == 200:
             if "results" in resp_data:
+                next = resp_data["SearchResult"]["nextPage"]["href"]
+                print(next)
                 return resp_data["results"]
-
             else:
                 return resp_data
+
+        if pagination == True and resp_ok and resp_status == 200:
+            if "results" in resp_data:
+                return resp_data["results"]
+            else:
+                return resp_data
+
         else:
             return []
 

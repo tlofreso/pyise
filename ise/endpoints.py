@@ -14,14 +14,19 @@ class Endpoints(object):
 
         return self.ise_con.get("/endpoint?filter=mac.EQ." + mac, **kwargs)
 
-    def get_groups(self, api_filter=None, **kwargs):
+    def get_groups(self, api_filter="?size=10", pagination=True, **kwargs):
         """GET all Endpoint Identity Groups
 
-        :param api_filter: Apply a filter to GET call. Format: api_filter='?page=1&size=10'
+        :param api_filter: Apply a filter to GET call. Uses a default page size of 10. Format: api_filter='?page=1&size=10'
+        :param pagination: Setting pagination equal to False will return all groups. Format: pagination=False
         :param kwargs: requests body dict
+
+        Examples:
+        endpoints.get_groups(api_filter='?page=1&size=20')
+        endpoints.get_groups(pagination=False)
         """
 
-        return self.ise_con.get("/endpointgroup", api_filter, **kwargs)
+        return self.ise_con.get("/endpointgroup", api_filter, pagination, **kwargs)
 
     def get_endpoints(self, **kwargs):
         # Return all endpoints
