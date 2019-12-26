@@ -70,6 +70,7 @@ class IseConnection(object):
         return response.ok, response.status_code, response_data
 
     def get(self, params, **kwargs):
+        # Function for REST method: GET
 
         url = "{}{}".format(self.base_url, params)
 
@@ -78,16 +79,20 @@ class IseConnection(object):
         if resp_ok and resp_status == 200:
             if "results" in resp_data:
                 return resp_data["results"]
+
             else:
                 return resp_data
         else:
             return []
 
-    def put(self, params, **kwargs):
+    def put(self, params, data, **kwargs):
+        # Function for REST method: PUT
 
-        url = "{}{}".format(self.base_url, params, data)
+        url = "{}{}".format(self.base_url, params)
 
-        resp_ok, resp_status, resp_data = self.__request("PUT", params=params, data=json.dumps(data), url=url)
+        resp_ok, resp_status, resp_data = self.__request(
+            "PUT", params=params, data=json.dumps(data), url=url
+        )
 
         if resp_ok and resp_status == 201:
             if "results" in resp_data:
@@ -98,10 +103,25 @@ class IseConnection(object):
             return []
 
     def patch():
+        # Function for REST method: PATCH
         pass
 
-    def post():
-        pass
+    def post(self, params, data, **kwargs):
+        # Function for REST method: POST
+        url = "{}{}".format(self.base_url, params)
+        data = json.dumps(data)
+
+        resp_ok, resp_status, resp_data = self.__request(
+            "POST", params=params, data=data, url=url
+        )
+
+        if resp_ok and resp_status == 201:
+            if "results" in resp_data:
+                return resp_data["results"]
+            else:
+                return resp_data
+        else:
+            return []
 
     def delete():
         pass

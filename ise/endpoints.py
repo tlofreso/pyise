@@ -20,27 +20,40 @@ class Endpoints(object):
 
         return self.ise_con.get("/endpoint", **kwargs)
 
-    def create_endpoint(self, name, description, mac, groupID, staticGroupAssignment):
+    def create_endpoint(
+        self, name, description, mac, groupID, staticGroupAssignment, **kwargs
+    ):
+        # Create an endpoint that does not yet exits
 
-        data = {"ERSEndPoint" : {"name" : name,
-                    "description" : description,
-                    "mac" : mac,
-                    "groupId" : groupID,
-                    "staticGroupAssignment" : staticGroupAssignment
-                  },
-                }
-        
+        data = {
+            "ERSEndPoint": {
+                "name": name,
+                "description": description,
+                "mac": mac,
+                "groupId": groupID,
+                "staticGroupAssignment": staticGroupAssignment,
+            }
+        }
+
         return self.ise_con.post("/endpoint", data, **kwargs)
 
-    def update_endpoint(self, mac=None, **kwargs):
+    def update_endpoint(
+        self, name, description, groupID, staticGroupAssignment, mac=None, **kwargs
+    ):
+        # Update an existing endpoint
+
+        data = {
+            "ERSEndPoint": {
+                "name": name,
+                "description": description,
+                "mac": mac,
+                "groupId": groupID,
+                "staticGroupAssignment": staticGroupAssignment,
+            }
+        }
 
         return self.ise_con.put("/endpoint" + mac, **kwargs)
 
     def delete_endpoint():
         pass
-
-
-
-
-
 
